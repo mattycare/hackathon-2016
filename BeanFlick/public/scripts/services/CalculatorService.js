@@ -102,13 +102,13 @@
         }
     }
     
-    this.moveBuffer = function ($event) {
-        eventBufferX.push($event.pageX);
-        eventBufferY.push($event.pageY);
+    this.moveBuffer = function (x, y) {
+        eventBufferX.push(x);
+        eventBufferY.push(y);
         
         if (eventBufferY.length >= 20) {
             if (eventBufferY[0] - eventBufferY[eventBufferY.length - 1] < -20) {
-                InteractionFactory.downData.y = $event.pageY;
+                InteractionFactory.downData.y = y;
                 InteractionFactory.downData.time = Date.now();
 
             }

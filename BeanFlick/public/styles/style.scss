@@ -16,6 +16,10 @@
 
 @import "modules/odometer";
 
+html, body {
+    min-height: 100%;
+}
+
 // global
 body {
     font-family: 'Roboto Slab', serif;

@@ -5,18 +5,23 @@
     
     $scope.downInteraction = function ($event) {
         
+        var x = $event.type === "touchstart" ? $event.originalEvent.touches[0].pageX : $event.pageX;
+        var y = $event.type === "touchstart" ? $event.originalEvent.touches[0].pageY : $event.pageY;
+        var xTollerance = $event.type=== "touchstart" ? ImageFactory.throwable.centerX + 50 : ImageFactory.throwable.centerX;
+        var yTollerance = $event.type=== "touchstart" ? ImageFactory.throwable.centerY + 50 : ImageFactory.throwable.centerY;
+        
 
-        if ($event.pageX < InteractionFactory.x + ImageFactory.throwable.centerX
-                && $event.pageX > InteractionFactory.x - ImageFactory.throwable.centerX
-                && $event.pageY < InteractionFactory.y + ImageFactory.throwable.centerY 
-                && $event.pageY > InteractionFactory.y - ImageFactory.throwable.centerY 
+        if (x < InteractionFactory.x + xTollerance
+                && x > InteractionFactory.x - xTollerance
+                && y < InteractionFactory.y + yTollerance
+                && y > InteractionFactory.y - yTollerance 
                 && $scope.interactionAllowed) {
             
             $scope.dragAllowed = true;
             
             InteractionFactory.downData = {
-                x: $event.pageX,
-                y: $event.pageY,
+                x: x,
+                y: y,
                 time: Date.now()
             }
 
@@ -26,14 +31,17 @@
     
     $scope.moveInteraction = function ($event) {
         
-        if ($scope.dragAllowed && $scope.interactionAllowed) {
-            CalculatorService.moveBuffer($event);
+        var x = $event.type === "touchmove" ? $event.originalEvent.touches[0].pageX : $event.pageX;
+        var y = $event.type === "touchmove" ? $event.originalEvent.touches[0].pageY : $event.pageY;
 
-            if ($event.pageY < CanvasFactory.height - GlobalSettingsFactory.throwAreaHeight) {
-                $scope.upInteraction($event)
+        if ($scope.dragAllowed && $scope.interactionAllowed) {
+            CalculatorService.moveBuffer(x, y);
+
+            if (y < CanvasFactory.height - GlobalSettingsFactory.throwAreaHeight) {
+                $scope.launch(x, y);
             } else {
-                InteractionFactory.x = $event.pageX;
-                InteractionFactory.y = $event.pageY;
+                InteractionFactory.x = x;
+                InteractionFactory.y = y;
             }
         }
     }
@@ -41,11 +49,18 @@
     $scope.upInteraction = function ($event) {
         if ($scope.interactionAllowed && $scope.dragAllowed) {
             $scope.dragAllowed = false;
+        }
+    }
+    
+    $scope.launch = function (x, y) {
+
+        if ($scope.interactionAllowed && $scope.dragAllowed) {
+            $scope.dragAllowed = false;
             $scope.interactionAllowed = false;
             
             InteractionFactory.upData = {
-                x: $event.pageX,
-                y: $event.pageY,
+                x: x,
+                y: y,
                 time: Date.now()
             }
             

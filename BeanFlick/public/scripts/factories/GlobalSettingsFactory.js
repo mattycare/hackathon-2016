@@ -1,6 +1,6 @@
 ﻿App.factory('GlobalSettingsFactory', function (CanvasFactory) {
     
-    var throwableStartPositionY = window.innerHeight - 50;
+    var throwableStartPositionY = CanvasFactory.height - 50;
 
     return {
         mouthData: {

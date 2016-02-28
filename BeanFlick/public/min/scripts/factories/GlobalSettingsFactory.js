@@ -1,1 +1,0 @@
-App.factory("GlobalSettingsFactory",function(t){var o=window.innerHeight-50;return{mouthData:{mouthLeft:{},mouthRight:{},height:100},mouthPositionY:400,mouthSpeed:1,mouthClosed:!1,throwableImageWidth:50,faceImageWidth:450,throwAreaHeight:200,throwableStartPosition:{x:450,y:o},friction:2}});

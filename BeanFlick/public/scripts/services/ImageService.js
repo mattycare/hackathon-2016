@@ -87,11 +87,6 @@ App.service('ImageService', function ($q, CalculatorService, ImageFactory, DrawS
             ImageFactory.face.positionY = -GlobalSettingsFactory.mouthLargestY + 200;
         }
 
-        
-
-
-
-
     }
 
 })

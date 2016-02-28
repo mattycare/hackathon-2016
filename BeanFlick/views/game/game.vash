@@ -3,6 +3,10 @@
     <img src="/images/beanflicklogo.png" alt="logo" class="logo">
       <h1>{{ CurrentGameFactory.userGame.CurrentPoints | number }} Points | {{ CurrentGameFactory.userGame.TotalLaunches | number}} Launches</h1>
     </div>
-  <canvas id="canvas" ng-controller="GameController" ng-mousedown="downInteraction($event)" ng-mouseup="upInteraction($event)" ng-mousemove="moveInteraction($event)" width="900" height="900">
+  <canvas id="canvas"
+          ng-controller="GameController"
+          ng-mousedown="downInteraction($event)" ng-mouseup="upInteraction($event)" ng-mousemove="moveInteraction($event)"
+          ng-touchstart="downInteraction($event)" ng-touchend="upInteraction($event)" ng-touchmove="moveInteraction($event)"
+          width="900">
   </canvas>
 </div>

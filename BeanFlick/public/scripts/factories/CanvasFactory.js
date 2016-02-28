@@ -2,9 +2,12 @@
     
     var canvasElement = document.getElementById('canvas');
     var canvasContext = canvasElement.getContext("2d");
-    var height = canvasElement.offsetHeight;
-    var width = canvasElement.offsetWidth;
+    
+    canvasElement.height = $(window).height();
 
+    var height = canvasElement.height;
+    var width = 900;
+    
     return {
         canvasElement: canvasElement,
         canvasContext: canvasContext,
